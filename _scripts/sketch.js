@@ -2,7 +2,7 @@
 let classifier;
 // URL do modelo treinado
 let imageModelURL = 'https://teachablemachine.withgoogle.com/models/SnvBOaEge/';
-  
+
 // Video
 let video;
 let flippedVideo;
@@ -24,16 +24,14 @@ let RosaFade = 0;
 let Amarelo;
 let AmareloFade = 0;
 
-
-
 // Carrega o modelo
 function preload() {
   classifier = ml5.imageClassifier(imageModelURL + 'model.json');
-  Preto = loadImage('img/oel.png');//Standby
-  Azul = loadImage('img/Chola.png');//Chorando
-  Verde = loadImage('img/fiesta.png');//Comemoração
-  Rosa = loadImage('img/Love.png');//coraçõeszinhos
-  Amarelo = loadImage('img/Hahaha.png');//Risos
+  Preto = loadImage('_src/oel.png');//Standby
+  Azul = loadImage('_src/Chola.png');//Chorando
+  Verde = loadImage('_src/fiesta.png');//Comemoração
+  Rosa = loadImage('_src/Love.png');//coraçõeszinhos
+  Amarelo = loadImage('_src/Hahaha.png');//Risos
 }
 
 function setup() {
@@ -52,28 +50,27 @@ function setup() {
 function draw() {
   background(0);
   imageMode(CORNER);
-  // Draw the video
+  // Desenha o video
   tint(255);
   image(flippedVideo, 0, 0);
-  
+
   // Chama as imagens quando a ação for realizada
   if (label == 'Preto') {
     PretoFade = 255;
-  }   
+  }
   else if (label == 'Azul') {
     AzulFade = 255;
-  } 
+  }
   else if (label == 'Verde') {
     VerdeFade = 255;
-  } 
+  }
   else if (label == 'Rosa') {
     RosaFade = 255;
   }
   else if (label == 'Amarelo') {
     AmareloFade = 255;
-    
   }
-  
+
   // Desaparece com a imagem após a ação
   if (PretoFade > 0) {
     tint(255, PretoFade);
@@ -100,7 +97,7 @@ function draw() {
     image(Amarelo, 0, 0);
     AmareloFade -= 15;
   }
-    
+
   // Identifica a Ação
   fill(255);
   textSize(16);
@@ -113,7 +110,6 @@ function classifyVideo() {
   flippedVideo = ml5.flipImage(video)
   classifier.classify(flippedVideo, gotResult);
   flippedVideo.remove();
-
 }
 
 // When we get a result
